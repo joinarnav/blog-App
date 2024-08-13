@@ -2,7 +2,8 @@ const express= require('express');
 const path= require('path');
 const router= require('./routes/user');
 const mongo= require('mongoose');
-
+const cookieParser = require('cookie-parser');
+const checkForCookie = require('./middlewares/auth');
 
 
 const PORT= 8003;
@@ -15,9 +16,12 @@ app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'));
 
 app.use(express.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(checkForCookie("token"));
 
 app.get('/', (req,res)=>{
-    res.render('homepage');
+    // console.log(req.user);
+    res.render('homepage',{User: req.user});
 })
 
 app.use('/user', router);
