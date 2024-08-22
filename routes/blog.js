@@ -7,7 +7,7 @@ const blog= require('../models/blog')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, path.resolve(`./public/images/uploads`))
+      cb(null, path.resolve(`./public/uploads`))
     },
     filename: function (req, file, cb) {
         const fileName= `${Date.now()}-${file.originalname}`;
@@ -29,7 +29,7 @@ router.post("/",upload.single('coverImage'), async (req,res)=>{
         body,
         title,
         createdBy:req.user._id,
-        coverImage:`/uploads/${req.file.filename}`
+        coverimageURL:`/uploads/${req.file.filename}`
     })
     return res.redirect(`/blog/${blog._id}`);
 })
