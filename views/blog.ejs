@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog/Homepage</title>
+    <style>
+        .blog-body {
+            white-space: pre-line; /* Treats newline characters as line breaks */
+            word-wrap: break-word; /* Ensures long words are wrapped */
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/script') %>
+    <%- include('./partials/nav') %>
+    <div class="container mt-4">
+        <h1><%= Blog.title %></h1>
+        <img src="<%= Blog.coverimageURL %>" width="500px" alt="">
+        <div class="mt-3 blog-body mb-5"><%= Blog.body %></div>
+    </div>
+</body>
+</html>

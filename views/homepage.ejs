@@ -5,21 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog/Homepage</title>
+
+    <style>
+        .card-img-top {
+    height: 200px; /* Fixed height */
+    object-fit: cover; /* Maintains aspect ratio and covers the area */
+}
+
+    </style>
 </head>
+
 <body>
     <%- include('./partials/script') %>
     <%- include('./partials/nav') %>
     <div class="container mt-3">
-        <% blogs.forEach(blog => { %>
-            <div class="card" style="width: 18rem;">
-                <img src="<%= blog.coverimageURL %>" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title"><%= blog.title %></h5>
-                  <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+        <div class="row row-cols-2 row-cols-md-4 g-4">
+            <% blogs.forEach(blog => { %>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="<%= blog.coverimageURL %>" class="card-img-top img-fluid" alt="Cover Image">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= blog.title %></h5>
+                            <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
-        <% }) %>
-
+            <% }) %>
+        </div>
     </div>
 </body>
 </html>
