@@ -11,6 +11,11 @@
     <%- include('./partials/nav') %>
 
     <div class="container mt-4">
+      <% if (error) { %>
+        <div class="alert alert-danger" role="alert">
+          <%= error %>
+        </div>
+      <% } %>
         <form action="/user/signup" method="POST">
             <div class="mb-3">
                 <label for="fullName" class="form-label">Full Name</label>

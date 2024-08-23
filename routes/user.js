@@ -25,14 +25,20 @@ router.post('/signin', async (req, res)=>{
 })
 router.post('/signup', async (req, res)=>{
     const {fullName, email, password}= req.body;
-    await user.create({
-        fullName,
-        email, 
-        password
-    })
-    const token= await user.matchPasswordandgenerateToken(email, password);
-    return res.cookie("token", token).redirect('/');
+    try{
+        await user.create({
+            fullName,
+            email, 
+            password
+        })
+        const token= await user.matchPasswordandgenerateToken(email, password);
+        return res.cookie("token", token).redirect('/');
+    }
+    catch(e){
+        return res.render("signup", {error:"Email already exists!"});
+    }
 })
+
 router.get("/logout", (req,res)=>{
     res.clearCookie('token').redirect('/');
 })
